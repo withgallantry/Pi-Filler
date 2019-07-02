@@ -1,5 +1,5 @@
 {
-  "name": "electron-quick-start",
+  "name": "PiFiller",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
@@ -55,7 +55,7 @@
     "react-start": "parcel -p 3000 index.html --out-dir build --target node",
     "parcel-watch": "parcel watch index.html --out-dir build --public-url ./ --target electron",
     "react-build": "parcel build index.html --out-dir build --public-url ./ --target electron",
-    "electron-build": "electron-builder -mwl",
+    "electron-build": "electron-builder -m",
     "electron-rebuild": "electron-rebuild -f -s -v 2.0.3",
     "clean-build": "rm -rf build/ .cache dist/",
     "build": "npm run clean-build && npm run react-build && npm run electron-build",
@@ -68,6 +68,7 @@
     "appId": "com.bluuprom",
     "files": [
       "main.js",
+      "src/libs/elevate.js",
       "src/assets/*",
       "build/**/*"
     ],

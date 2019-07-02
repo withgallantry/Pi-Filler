@@ -2,8 +2,7 @@
 const {app, BrowserWindow, dialog, ipcMain} = require('electron');
 const path = require('path');
 const elevate = require('./src/libs/elevate');
-const argv = require('yargs')(process.argv).argv;
-const {getFileList} = require('./src/libs/rootOps');
+// const argv = require('yargs')(process.argv).argv;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -43,7 +42,8 @@ app.on('ready', createWindow)
 app.on('window-all-closed', function () {
     // On macOS it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') app.quit()
+    // if (process.platform !== 'darwin') app.quit()
+    process.exit(0);
 })
 
 app.on('activate', function () {
