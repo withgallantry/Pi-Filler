@@ -67,47 +67,10 @@ ipcMain.on('rootsd', function (event, socketPath) {
         __filename,
     ];
 
-    console.log('STARTING SECOND');
-    //ELECTRON_RUN_AS_NODE
+    app.dock.hide();
     elevate.require(additionalArguments, function (error) {
         if (error) {
             dialog.showErrorBox('Elevation Error', error.message)
-            //return process.exit(1)
         }
     })
 });
-
-
-const connect = (socketPath, cb) => {
-    const ipc = require("crocket");
-    const client = new ipc();
-
-    return new Promise((accept) => {
-        client.connect({
-            path: socketPath
-        }, function (error) {
-            if (error) {
-                throw error
-            }
-
-            // connected successfully
-            accept(client);
-        })
-    });
-};
-
-const launchClient = async () => {
-    const socketPath = argv.socketpath;
-    const client = await connect(socketPath);
-
-    client.on('/readFileList', async (data) => {
-        const {path, filePath} = JSON.parse(data);
-        const files = await getFileList(path, filePath);
-        console.log('READ THE FILE LIST AND MOVE THE BUS');
-    });
-};
-
-if (argv.sdreader) {
-    launchClient();
-    return;
-}

@@ -27,7 +27,10 @@ exports.require = async (additionalArguments, callback) => {
             sudoPrompt.exec(args.join(' '), {
                 name: packageJSON.displayName,
                 icns: path.join(__dirname, '../assets/logo.png')
-            }, callback)
+            }, () => {
+                process.exit(0);
+            })
+
 
         } else if (platform === 'win32') {
 
