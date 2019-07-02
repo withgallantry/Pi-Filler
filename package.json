@@ -3,20 +3,90 @@
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
-  "scripts": {
-    "start": "electron ."
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electron/electron-quick-start.git"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Fill",
+    "Your",
+    "Pi"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^5.0.2"
-  }
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^4.1.1",
+    "cross-env": "^5.2.0",
+    "electron": "2.0.3",
+    "electron-builder": "^20.44.4",
+    "electron-rebuild": "^1.8.5",
+    "parcel-bundler": "^1.12.3",
+    "wait-on": "^3.2.0"
+  },
+  "dependencies": {
+    "auto-fontsize": "^1.0.18",
+    "better-react-spinkit": "^2.0.4",
+    "bluebird": "^3.5.5",
+    "bytes": "^3.1.0",
+    "crocket": "^0.9.11",
+    "denymount": "^2.3.0",
+    "drivelist": "^8.0.6",
+    "electron-is-dev": "^1.1.0",
+    "file-disk": "^6.0.1",
+    "is-elevated": "^3.0.0",
+    "office-ui-fabric-react": "^7.6.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "resin-image-fs": "^5.0.8",
+    "sudo-prompt": "^9.0.0",
+    "umount": "^1.1.6"
+  },
+  "scripts": {
+    "react-start": "parcel -p 3000 index.html --out-dir build --target node",
+    "parcel-watch": "parcel watch index.html --out-dir build --public-url ./ --target electron",
+    "react-build": "parcel build index.html --out-dir build --public-url ./ --target electron",
+    "electron-build": "electron-builder -mwl",
+    "electron-rebuild": "electron-rebuild -f -s -v 2.0.3",
+    "clean-build": "rm -rf build/ .cache dist/",
+    "build": "npm run clean-build && npm run react-build && npm run electron-build",
+    "start": "concurrently \"npm run react-build \" \"npm run parcel-watch\" \"electron . \"",
+    "start-dev": "concurrently \"npm run parcel-watch \" \"electron . \"",
+    "postinstall": "electron-builder install-app-deps",
+    "build-mac": "npm run clean-build && find . -name .DS_Store -depth -exec rm {} \\; && npm dedupe && electron-packager ./ PiFiller --platform=darwin --arch=all --electron-version=2.0.3 --overwrite --prune --app-version=1.0.0 --icon=./src/assets/logo.png"
+  },
+  "build": {
+    "appId": "com.bluuprom",
+    "files": [
+      "main.js",
+      "src/assets/*",
+      "build/**/*"
+    ],
+    "mac": {
+      "target": "dmg",
+      "icon": "src/assets/logo.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/logo.png"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "src/assets/logo.png",
+      "category": "Development"
+    }
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
+  "bugs": {
+    "url": "https://github.com/electron/electron-quick-start/issues"
+  },
+  "homepage": "./"
 }

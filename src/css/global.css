@@ -1,0 +1,197 @@
+html, body {
+    font-family: Verdana;
+    padding: 0;
+    margin: 0;
+}
+
+.layout {
+    display: flex;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.vertical {
+    flex-direction: column;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.wrap {
+    /*flex-wrap: wrap;*/
+    flex-flow: row wrap;
+}
+
+.icon {
+    color: #000000;
+}
+
+.flex {
+    flex: 1;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.sdCardContainer {
+    cursor: pointer;
+    margin-top: -36px;
+}
+
+.sdCard {
+    width: 80px;
+    height: 80px;
+}
+
+.cardSize {
+    display: block;
+    position: absolute;
+    margin-top: -34px;
+    margin-left: 28px;
+    font-size: 12px;
+}
+
+.loading {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    z-index: 9999;
+}
+
+.itemTile {
+    padding: 20px;
+    cursor: pointer;
+}
+
+.itemTile:hover {
+    background-color: #f0f0f0;
+}
+
+.tileName {
+    word-break: break-all;
+    max-width: 78px;
+    text-align: center;
+}
+
+.header {
+    height: 30px;
+    background-color: #FFFFFF;
+    width: 100vw;
+    position: fixed;
+    padding: 6px;
+}
+
+.directoryList {
+    margin-top: 42px;
+}
+
+.dirIcon {
+    width: 80px;
+    height: 80px;
+}
+
+.fileIcon {
+    font-size: 60px;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+}
+
+.fileProgressDialog {
+    width: 460px;
+    height: 100px;
+    border-radius: 6px;
+    background-color: #f3f3f3;
+}
+
+.fileProgressDialogScrollable {
+    height: 100%;
+}
+
+.filePath {
+    font-size: 14px;
+}
+
+.innerFileProgressDialog {
+    height: 100%;
+}
+
+.progressIndicator {
+    width: 80%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.refreshIcon {
+    font-size: 40px;
+    line-height: 60px;
+    width: 60px;
+    height: 60px;
+    color: black;
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.mainLogo {
+    width: 400px;
+}
+
+.refreshText {
+    margin-bottom: 18px;
+}
+
+.refreshTextAction {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.refreshTextAction:hover {
+    font-size: 12px;
+    text-decoration: underline;
+    margin-top: 2px;
+}
+
+.noMedia {
+    margin-top: -36px;
+}
+
+.errorContentDialog {
+    width: 460px;
+    height: 100px;
+    border-radius: 6px;
+    background-color: #f3f3f3;
+}
+
+.insideError {
+    height: 100%;
+}
+
+.errorDismissButton {
+    margin: 10px;
+}
+
+.errorMessage {
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 0px;
+    margin-top: 12px;
+    font-size: 16px;
+    flex: 1;
+    justify-content: center;
+}
