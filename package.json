@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
+  "displayName": "PiFiller",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/electron/electron-quick-start.git"
@@ -36,7 +37,9 @@
     "crocket": "^0.9.11",
     "denymount": "^2.3.0",
     "drivelist": "^8.0.6",
+    "electron-better-ipc": "^0.3.0",
     "electron-is-dev": "^1.1.0",
+    "elevator": "^2.2.3",
     "file-disk": "^6.0.1",
     "is-elevated": "^3.0.0",
     "office-ui-fabric-react": "^7.6.0",

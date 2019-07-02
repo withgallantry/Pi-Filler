@@ -6,8 +6,9 @@ const pathing = require("path");
 const denymount = require("denymount");
 import store from '../redux/store';
 import {setError} from '../redux/actions';
-const isElevated = require('is-elevated');
-import ipc from 'crocket';
+import isElevated from 'is-elevated';
+import {setCorrectElevation} from './communicate';
+
 
 export const isMounted = (path) => {
     return new Promise((accept, reject) => {
@@ -56,11 +57,18 @@ const getType = (num) => {
 
 export const getFileList = async (path, filePath) => {
 
-    isElevated(function (error, elevated) {
-        if (error) {
-            cb.error(error)
-            return
-        }
+    const elevated = await isElevated();
+    if (!elevated) {
+        const server = await setCorrectElevation();
+        const opts = {
+            path, filePath
+        };
+        console.log(server);
+        setTimeout(() => {
+            server.emit('/readFileList', JSON.stringify(opts));
+        }, 6000);
+
+        return;
     }
 
     try {

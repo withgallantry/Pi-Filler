@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getFileList} from '../libs/sdcard';
+import {getFileList, setCorrectElevation} from '../libs/sdcard';
 import {connect} from 'react-redux';
 import {setLoading, setFilePath, addNavPath, popNavPath} from '../redux/actions';
 import ItemTile from '../components/itemTile';
@@ -23,8 +23,10 @@ class DirectoryList extends Component {
         if (drive) {
             this.props.setLoading(true);
             const files = await getFileList(drive, filePath);
-            this.setState({files});
-            this.props.setLoading(false);
+            if (files && files.length > -1) {
+                this.setState({files});
+                this.props.setLoading(false);
+            }
         }
     }
 

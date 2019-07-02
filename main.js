@@ -1,7 +1,9 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, dialog, ipcMain} = require('electron');
 const path = require('path');
-var ipcMain = electron.ipcMain;
+const elevate = require('./src/libs/elevate');
+const argv = require('yargs')(process.argv).argv;
+const {getFileList} = require('./src/libs/rootOps');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -54,23 +56,58 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 
 // receive message about starting rootwriter thread
-ipcMain.on('sdreader', function (event, imgPath, drive, socketPath) {
+ipcMain.on('rootsd', function (event, socketPath) {
     // elevate this process, with the additional command line options
-    var additionalArguments = [
+    const additionalArguments = [
         '--sdreader',
         '--socketpath',
         socketPath,
-        '--imgpath',
-        imgPath,
-        '--drive',
-        drive,
         '--require',
-        __filename
-    ]
+        'ELECTRON_RUN_AS_NODE',
+        __filename,
+    ];
+
+    console.log('STARTING SECOND');
+    //ELECTRON_RUN_AS_NODE
     elevate.require(additionalArguments, function (error) {
         if (error) {
-            electron.dialog.showErrorBox('Elevation Error', error.message)
+            dialog.showErrorBox('Elevation Error', error.message)
             //return process.exit(1)
         }
     })
-})
+});
+
+
+const connect = (socketPath, cb) => {
+    const ipc = require("crocket");
+    const client = new ipc();
+
+    return new Promise((accept) => {
+        client.connect({
+            path: socketPath
+        }, function (error) {
+            if (error) {
+                throw error
+            }
+
+            // connected successfully
+            accept(client);
+        })
+    });
+};
+
+const launchClient = async () => {
+    const socketPath = argv.socketpath;
+    const client = await connect(socketPath);
+
+    client.on('/readFileList', async (data) => {
+        const {path, filePath} = JSON.parse(data);
+        const files = await getFileList(path, filePath);
+        console.log('READ THE FILE LIST AND MOVE THE BUS');
+    });
+};
+
+if (argv.sdreader) {
+    launchClient();
+    return;
+}
