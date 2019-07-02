@@ -23,11 +23,11 @@
     "babel-preset-react": "^6.24.1",
     "concurrently": "^4.1.1",
     "cross-env": "^5.2.0",
-    "electron": "2.0.3",
     "electron-builder": "^20.44.4",
     "electron-rebuild": "^1.8.5",
     "parcel-bundler": "^1.12.3",
-    "wait-on": "^3.2.0"
+    "wait-on": "^3.2.0",
+    "electron": "^2.0.8"
   },
   "dependencies": {
     "auto-fontsize": "^1.0.18",
@@ -56,13 +56,13 @@
     "parcel-watch": "parcel watch index.html --out-dir build --public-url ./ --target electron",
     "react-build": "parcel build index.html --out-dir build --public-url ./ --target electron",
     "electron-build": "electron-builder -m",
-    "electron-rebuild": "electron-rebuild -f -s -v 2.0.3",
+    "electron-rebuild": "electron-rebuild -f -s -v 2.0.8",
     "clean-build": "rm -rf build/ .cache dist/",
     "build": "npm run clean-build && npm run react-build && npm run electron-build",
     "start": "concurrently \"npm run react-build \" \"npm run parcel-watch\" \"electron . \"",
     "start-dev": "concurrently \"npm run parcel-watch \" \"electron . \"",
     "postinstall": "electron-builder install-app-deps",
-    "build-mac": "npm run clean-build && find . -name .DS_Store -depth -exec rm {} \\; && npm dedupe && electron-packager ./ PiFiller --platform=darwin --arch=all --electron-version=2.0.3 --overwrite --prune --app-version=1.0.0 --icon=./src/assets/logo.png"
+    "build-mac": "npm run clean-build && find . -name .DS_Store -depth -exec rm {} \\; && npm dedupe && electron-packager ./ PiFiller --platform=darwin --arch=all --electron-version=2.0.8 --overwrite --prune --app-version=1.0.0 --icon=./src/assets/logo.png"
   },
   "build": {
     "appId": "com.bluuprom",
